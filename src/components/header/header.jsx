@@ -16,8 +16,9 @@ const Header = ()=>{
                 alignItems:"center"
             }}>
                 <Typography sx={{
-                    color:"white"
-                }} >Distribudor de fármacos</Typography>
+                    color:"white",
+                    textTransform:"uppercase"
+                }} >Distribuidor de fármacos</Typography>
             </Grid>
         </Grid>
     )
