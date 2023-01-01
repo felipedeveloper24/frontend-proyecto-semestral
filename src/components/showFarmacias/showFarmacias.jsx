@@ -17,7 +17,6 @@ const ShowFarmacias = ()=>{
 const {data,isLoading,refetch} = useQuery("farmacias",getFarmacias);
     
     if(!isLoading){
-        refetch();
         return(
             <Grid sx={{
                 width:"75%",
