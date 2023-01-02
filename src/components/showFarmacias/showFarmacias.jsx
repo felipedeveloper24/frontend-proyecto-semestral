@@ -14,6 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import { Link } from "react-router-dom";
 const ShowFarmacias = ()=>{
+    
 const {data,isLoading,refetch} = useQuery("farmacias",getFarmacias);
     
     if(!isLoading){

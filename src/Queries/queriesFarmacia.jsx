@@ -5,6 +5,7 @@ import clienteAxios from "../helpers/clienteAxios";
 
 
 export async function getFarmacias(){
+
    const {data,status} = await clienteAxios.get("/farmacia/all")
     if(status==200){
        
@@ -24,3 +25,6 @@ export async function createFarmacia(farmacia){
     return response.status;
 
 }
+
+
+

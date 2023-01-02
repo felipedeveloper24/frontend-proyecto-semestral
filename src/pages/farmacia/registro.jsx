@@ -30,7 +30,6 @@ const RegistroFarmacia = ()=>{
                 padding:"20px"
             }}>
                
-            
                     <TextField sx={{width:"90%",marginBottom:"10px"}} label="Nombre" {...register("farm_nombre",{required:true})}  />
                     {errors.farm_nombre && <Alert severity="error" sx={{width:"90%" }}>Por favor llenar este campo</Alert>}
                     <TextField label="Dirección" sx={{width:"90%",marginBottom:"10px",marginTop:"10px"}} {...register("farm_direccion",{required:true})} />
