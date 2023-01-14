@@ -11,7 +11,7 @@ const RegistroFarmacia = ()=>{
     const onSubmit=(data)=>{
         //llamamos a nuestra funcion para enviar la info al endpoint del backend
         createFarmacia(data);
-            navigate("/");
+        navigate("/");
     };
 
     return (
