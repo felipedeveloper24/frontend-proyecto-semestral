@@ -23,7 +23,7 @@ const navigate = useNavigate();
                 width:"75%",
                 margin:"0px auto"
             }}>
-                <Typography variant="h4" sx={{textAlign:"center",marginTop:"10px",marginBottom:"10px"}}>Listado de farmacias <Link to="/farmacia" className="btn btn-primary">Registrar Farmacia</Link> </Typography>
+                <Typography variant="h4" sx={{textAlign:"center",marginTop:"10px",marginBottom:"10px"}}>Listado de farmacias <Link to="/registrarFarmacia" className="btn btn-primary">Registrar Farmacia</Link> </Typography>
                <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>

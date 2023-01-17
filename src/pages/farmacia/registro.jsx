@@ -3,15 +3,18 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/header/header";
-import { createFarmacia } from "../../Queries/queriesFarmacia";
+import clienteAxios from "../../helpers/clienteAxios";
 
 const RegistroFarmacia = ()=>{
     const {register,handleSubmit, formState:{errors}} = useForm();
     const navigate = useNavigate();
-    const onSubmit=(data)=>{
+    const onSubmit= async(data)=>{
+        
         //llamamos a nuestra funcion para enviar la info al endpoint del backend
-        createFarmacia(data);
-        navigate("/");
+        const response = await clienteAxios.post("/farmacia/create",data);
+        if(response.status===200){
+            navigate("/farmacias");
+        }
     };
 
     return (
@@ -45,6 +48,7 @@ const RegistroFarmacia = ()=>{
         </Grid>
     )
 }
+
 
 
 export default RegistroFarmacia;

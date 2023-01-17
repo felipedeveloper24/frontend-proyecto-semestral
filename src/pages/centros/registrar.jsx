@@ -3,14 +3,17 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/header/header";
+import clienteAxios from "../../helpers/clienteAxios";
 import { createCentro } from "../../Queries/queriesCentro";
 
 const RegistrarCentro = ()=>{
     const {register,handleSubmit,formState:{errors}} = useForm();
     const navigate = useNavigate();
-    const onSubmit = (data)=>{
-        createCentro(data);
-        navigate("/centros");
+    const onSubmit = async(data)=>{
+        const response = await clienteAxios.post("/centro/create",data);
+        if(response.status===200){
+            navigate("/centros");
+        }
     }
 
     return (

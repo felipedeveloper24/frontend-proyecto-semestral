@@ -12,7 +12,7 @@ const Farmacia = ()=>{
             display:"flex",
             flexDirection:"column"
         }}>
-            <Header/>
+            <Header />
             <ShowFarmacias/>
 
         </Grid>

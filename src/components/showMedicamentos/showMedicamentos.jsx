@@ -1,8 +1,7 @@
-import { Grid, Typography,Button,Alert} from "@mui/material";
-import React from "react";
+import { Grid,Typography,Alert,Button} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { getCentros } from "../../Queries/queriesCentro";
+import { Link, useNavigate } from "react-router-dom";
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -12,44 +11,69 @@ import Table from "@mui/material/Table";
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
-import { deleteCentro } from "../../Queries/queriesCentro";
-const ShowCentros = ()=>{
-    const {data,isLoading} = useQuery("centros",getCentros);
-  
+import clienteAxios from "../../helpers/clienteAxios";
+const ShowMedicamentos = ()=>{
     const navigate = useNavigate();
-    if(!isLoading && !data.mensaje){
+    const [medicamentos,setMedicamentos] = useState([]);
+    const [loading,setLoading] = useState(false);
+    const [mensaje,setMensaje] = useState(""); 
+    const getMedicamentos = async()=>{
+        const response = await clienteAxios.get("/medicamento/all");
+        console.log(response.data);
+        if(response.status===200){
+            if(response.data.mensaje){
+                setMensaje(response.data.mensaje);
+                setLoading(true)
+            }else{
+                setMedicamentos(response.data.data);
+                setLoading(true)
+            }
+        }
+    }
+    useEffect(()=>{
+        getMedicamentos();
+    },[]);
+    const deleteMedicamento = async(id)=>{
+        const response = await clienteAxios.delete("/medicamento/delete",{
+            data:{id:id}
+        })
+        if(response.status===200){
+            window.location.reload(true);
+        }
+        
+    }
+    
+    if(loading && mensaje<=0){
+
         return(
             <Grid sx={{
                 width:"75%",
                 margin:"0px auto"
             }}>
-                <Typography variant="h4" sx={{textAlign:"center",marginTop:"10px",marginBottom:"10px"}}>Listado de centros <Link to="/registrarCentro" className="btn btn-primary">Registrar Centro de distribución</Link> </Typography>
+                <Typography variant="h4" sx={{textAlign:"center",marginTop:"10px",marginBottom:"10px"}}>Listado de Medicamentos <Link to="/registrarMedicamento" className="btn btn-primary">Registrar Medicamento</Link> </Typography>
                <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                         <TableRow>
-                            <TableCell>Código</TableCell>
-                            <TableCell >Dirección</TableCell>
-                            <TableCell >Teléfono</TableCell>
+                            <TableCell>Nombre</TableCell>
+                            <TableCell >Compuesto</TableCell>
                             <TableCell>Acciones</TableCell>
                         </TableRow>
                         </TableHead>
                         <TableBody>
                             {
-                                data.data.map((centro,idx)=>{
+                                medicamentos.map((medicamento,idx)=>{
                                     return(
                                     <TableRow key={idx}>
                                           <TableCell component="th" scope="row">
-                                                {centro.cd_codigo}
+                                                {medicamento.med_nombre}
                                             </TableCell>
-                                            <TableCell >{centro.cd_direccion}</TableCell>
-                                            <TableCell >{centro.cd_telefono}</TableCell>
+                                            <TableCell >{medicamento.med_compuesto}</TableCell>
                                             <TableCell  >
-                                                <Button onClick={()=>navigate(`/verStock/${centro.id}`)}>Stock</Button>
-                                                <Button color="success" onClick={()=>navigate(`/modificarCentro/${centro.id}`)}  >
+                                                <Button color="success" onClick={()=>navigate(`/modificarMedicamento/${medicamento.id}`)}  >
                                                     <ChangeCircleIcon />
                                                 </Button>
-                                                <Button color="error" onClick={()=>deleteCentro(centro.id)}  >
+                                                <Button color="error" onClick={()=>deleteMedicamento(medicamento.id)}  >
                                                     <DeleteIcon  />
                                                 </Button>
                                               
@@ -67,13 +91,15 @@ const ShowCentros = ()=>{
             </Grid>
         )     
     }
-    if(!isLoading && data.mensaje){
+    
+    if(loading && mensaje.length>0){
+        console.log(mensaje);
         return(
             <Grid sx={{
                 width:"75%",
                 margin:"0px auto"
             }}>
-               <Typography variant="h4" sx={{textAlign:"center",marginTop:"10px",marginBottom:"10px"}}>Listado de centros <Link to="/registrarCentro" className="btn btn-primary">Registrar Centro de distribución</Link> </Typography>
+               <Typography variant="h4" sx={{textAlign:"center",marginTop:"10px",marginBottom:"10px"}}>Listado de Medicamentos <Link to="/registrarMedicamento" className="btn btn-primary">Registrar Medicamento</Link> </Typography>
                <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
@@ -87,11 +113,13 @@ const ShowCentros = ()=>{
                         
                     </Table>
                     </TableContainer>
-                    <Alert severity="error" sx={{width:"50%",margin:"0px auto",marginTop:"20px"}}>{data.mensaje}</Alert>
+                    <Alert severity="error" sx={{width:"50%",margin:"0px auto",marginTop:"20px"}}>{mensaje}</Alert>
     
             </Grid>
         )
     }
+    
+   
 };
 
-export default ShowCentros;
+export default ShowMedicamentos;

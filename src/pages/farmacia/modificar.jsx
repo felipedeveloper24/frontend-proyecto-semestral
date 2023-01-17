@@ -52,7 +52,7 @@ const Modificar = ()=>{
         return(
             <Grid container sx={{width:"100%",display:"flex",flexDirection:"column"}}>
                 <Header/>
-                <Typography variant="h5" sx={{textAlign:"center",marginTop:"10px",marginBottom:"10px"}}>Registro de farmacia</Typography>
+                <Typography variant="h5" sx={{textAlign:"center",marginTop:"10px",marginBottom:"10px"}}>Actualización de farmacia</Typography>
                 <form onSubmit={onSubmit}>
                 <Card sx={{
                     width:"40%",

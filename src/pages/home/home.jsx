@@ -23,8 +23,8 @@ const Home = ()=>{
             }}>
                 <NavLink className="btn btn-primary mt-3" to="/farmacias" >Farmacias</NavLink>
                 <NavLink className="btn btn-primary mt-3" to="/centros" >Centros de distribución</NavLink>
-                <NavLink className="btn btn-primary mt-3" >Medicamentos</NavLink>
-                <NavLink className="btn btn-primary mt-3" >Ingresos</NavLink>
+                <NavLink className="btn btn-primary mt-3" to="/medicamentos" >Medicamentos</NavLink>
+                <NavLink className="btn btn-primary mt-3" to="/ingresos" >Ingresos</NavLink>
                 <NavLink className="btn btn-primary mt-3" >Traspasos</NavLink>
                 <NavLink className="btn btn-primary mt-3">Egresos</NavLink>
             </Grid>

@@ -1,6 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Header = ()=>{
     return(
         <Grid item sx={{
@@ -20,6 +20,10 @@ const Header = ()=>{
                     textTransform:"uppercase"
                 }} >Distribuidor de fármacos</Typography>
             </Grid>
+            <Grid sx={{width:"30%",display:"flex",justifyContent:"flex-start",alignItems:"flex-start"}}>
+                
+            </Grid>
+            <Link  className="text-white text-decoration-none text-uppercase m-auto" to="/">Inicio</Link>
         </Grid>
     )
 }
